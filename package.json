@@ -1,0 +1,9 @@
+{
+  "name": "autobattler-mvp-monorepo",
+  "private": true,
+  "workspaces": ["shared", "server", "client"],
+  "scripts": {
+    "build": "npm run -w shared build && npm run -w server build",
+    "test": "npm run -w server test"
+  }
+}
