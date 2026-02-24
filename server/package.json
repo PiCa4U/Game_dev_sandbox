@@ -9,7 +9,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@autobattler/shared": "workspace:*",
+    "@autobattler/shared": "file:../shared",
     "@colyseus/schema": "^2.0.32",
     "colyseus": "^0.15.0",
     "express": "^4.19.2",

@@ -2,16 +2,22 @@
 
 Monorepo with authoritative Colyseus server and Expo React Native client.
 
-## Critical install rule (important)
-This repository is a **workspace monorepo**. You must run dependency install from the **repo root**, not from `server/` or `client/` folders.
-
-Correct:
+## Install dependencies
+### Recommended (root install)
 ```bash
 npm install
 ```
-from `/workspace/Game_dev_sandbox`.
+from repo root.
 
-If you run `npm install` inside `server`, npm will try to fetch `@autobattler/shared` from public registry and fail.
+### If your npm is old and/or you install inside subfolders
+This repo now uses `file:../shared` for local shared package linking, so `npm install` inside `server/` or `client/` is also supported.
+
+If you still get `EUNSUPPORTEDPROTOCOL workspace:*`, update npm:
+```bash
+npm -v
+npm i -g npm@latest
+```
+(or use Node LTS with bundled modern npm).
 
 ## Architecture
 - `shared`: protocol, enums, and type contracts used by both sides.

@@ -9,7 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@autobattler/shared": "workspace:*",
+    "@autobattler/shared": "file:../shared",
     "@react-three/fiber": "^8.17.6",
     "colyseus.js": "^0.15.13",
     "expo": "^51.0.0",
