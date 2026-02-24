@@ -19,3 +19,4 @@ npm run preview
 - Open browser DevTools Console first.
 - If server is down/unreachable, UI now shows `Connection error: ...` banner.
 - Ensure server is running on `ws://localhost:2567` or set `VITE_COLYSEUS_URL`.
+- If Network/WebSocket look healthy but page is visually blank, hard-refresh (`Ctrl+F5`) to clear stale CSS/JS cache.

@@ -1,5 +1,10 @@
 :root { font-family: Inter, system-ui, Arial, sans-serif; color: #e6edf3; background: #0d1117; }
-body { margin: 0; }
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  background: #0d1117;
+  color: #e6edf3;
+}
 .app { max-width: 1000px; margin: 0 auto; padding: 16px; }
 .card { border: 1px solid #30363d; border-radius: 8px; padding: 10px; margin-bottom: 8px; background: #161b22; }
 button { background: #238636; color: white; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; }
