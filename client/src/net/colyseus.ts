@@ -3,7 +3,7 @@ import { C2S, S2C, type BattleEvent, type CardOffer, type PhaseUpdate } from "@a
 import { useMatchStore } from "../state/store";
 import { useVisualQueue } from "../battlelog/queue";
 
-const WS_ENDPOINT = process.env.EXPO_PUBLIC_COLYSEUS_URL ?? "ws://localhost:2567";
+const WS_ENDPOINT = import.meta.env.VITE_COLYSEUS_URL ?? "ws://localhost:2567";
 
 let room: Room | null = null;
 
@@ -35,6 +35,7 @@ export const connectMatch = async (): Promise<void> => {
     }
   });
 
+  room.send(C2S.MATCHMAKING_JOIN);
   room.send(C2S.CLIENT_READY);
 };
 

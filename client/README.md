@@ -1,10 +1,12 @@
-# Client
+# Client (Web)
 
-Expo React Native app with Colyseus networking and three.js rendering.
+React + Vite web client with Colyseus networking, zustand state, and three.js rendering via `@react-three/fiber`.
 
 ## Commands
 ```bash
-npm run start
+npm run dev
+npm run build
+npm run preview
 ```
 
 ## UX flow

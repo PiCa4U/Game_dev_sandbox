@@ -1,23 +1,30 @@
 # Session Auto-Battler MVP
 
-Monorepo with authoritative Colyseus server and Expo React Native client.
+Monorepo with authoritative Colyseus server and web React client (Vite + three.js).
 
-## Install dependencies
-### Recommended (root install)
+## Critical install rule (important)
+This repository is a **workspace monorepo**. You must run dependency install from the **repo root**, not from `server/` or `client/` folders.
+
+Correct:
 ```bash
 npm install
 ```
-from repo root.
+from `/workspace/Game_dev_sandbox`.
 
-### If your npm is old and/or you install inside subfolders
-This repo now uses `file:../shared` for local shared package linking, so `npm install` inside `server/` or `client/` is also supported.
+If you run `npm install` inside `server`, npm will try to fetch `@autobattler/shared` from public registry and fail.
 
-If you still get `EUNSUPPORTEDPROTOCOL workspace:*`, update npm:
+## NPM compatibility note
+If your npm is old and throws `EUNSUPPORTEDPROTOCOL` for `workspace:*`, update npm or use this repo revision where local shared dependency is linked via `file:../shared`.
+
+Recommended versions:
+- Node.js 18+ (or 20+)
+- npm 8+ (npm 10 recommended)
+
+Check versions:
 ```bash
+node -v
 npm -v
-npm i -g npm@latest
 ```
-(or use Node LTS with bundled modern npm).
 
 ## Architecture
 - `shared`: protocol, enums, and type contracts used by both sides.
@@ -32,9 +39,9 @@ npm run -w server dev
 ```
 In another terminal:
 ```bash
-npm run -w client start
+npm run -w client dev
 ```
-Set `EXPO_PUBLIC_COLYSEUS_URL=ws://<host>:2567` for device testing.
+Set `VITE_COLYSEUS_URL=ws://<host>:2567` if running server on another host.
 
 ## Gameplay rules (CONFIG defaults)
 - 8 players, ready required.
@@ -51,5 +58,5 @@ Set `EXPO_PUBLIC_COLYSEUS_URL=ws://<host>:2567` for device testing.
 - Client never computes outcomes; it only renders streamed `battle:log`.
 
 ## Notes
-- Client uses `@react-three/fiber/native` + `three` to visualize battle-log events.
+- Client uses web `@react-three/fiber` + `three` to visualize battle-log events.
 - All random decisions come from seeded server RNG (`state.seed` exposed for debugging).

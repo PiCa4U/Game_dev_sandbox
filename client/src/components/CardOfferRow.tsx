@@ -1,5 +1,3 @@
-import React from "react";
-import { View, Text, Button } from "react-native";
 import { CardOffer } from "@autobattler/shared";
 
 type Props = {
@@ -8,15 +6,15 @@ type Props = {
   onPick: (offerId: string, cardId: string) => void;
 };
 
-export const CardOfferRow: React.FC<Props> = ({ offerId, offers, onPick }) => (
-  <View style={{ gap: 6 }}>
+export const CardOfferRow = ({ offerId, offers, onPick }: Props): JSX.Element => (
+  <div>
     {offers.map((c) => (
-      <View key={c.cardId} style={{ borderWidth: 1, padding: 8 }}>
-        <Text>{c.name}</Text>
-        <Text>{c.element} / {c.rarity}</Text>
-        <Text>{c.desc}</Text>
-        <Button title="Buy" onPress={() => onPick(offerId, c.cardId)} />
-      </View>
+      <div className="card" key={c.cardId}>
+        <div><strong>{c.name}</strong></div>
+        <div className="muted">{c.element} / {c.rarity}</div>
+        <div>{c.desc}</div>
+        <button onClick={() => onPick(offerId, c.cardId)}>Buy</button>
+      </div>
     ))}
-  </View>
+  </div>
 );
