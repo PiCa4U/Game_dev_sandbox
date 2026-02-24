@@ -18,7 +18,9 @@
       "src/*": [
         "*"
       ]
-    }
+    },
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false
   },
   "include": [
     "src/**/*.ts",
