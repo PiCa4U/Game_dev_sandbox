@@ -43,6 +43,8 @@ npm run -w client dev
 ```
 Set `VITE_COLYSEUS_URL=ws://<host>:2567` if running server on another host.
 
+If client shows blank/white page, check browser console and connection banner in UI; most often the Colyseus server is not reachable.
+
 ## Gameplay rules (CONFIG defaults)
 - 8 players, ready required.
 - Phases: `CHARACTER_SELECT -> CHOICE -> BATTLE -> ROUND_RESULT` loop.

@@ -10,6 +10,7 @@ let room: Room | null = null;
 export const connectMatch = async (): Promise<void> => {
   const client = new Client(WS_ENDPOINT);
   room = await client.joinOrCreate("match");
+  useMatchStore.getState().setBootError("");
 
   room.onMessage(S2C.PHASE_UPDATE, (msg: PhaseUpdate) => {
     useMatchStore.getState().setPhase(msg.phase, msg.endsAt, msg.round);
@@ -33,6 +34,14 @@ export const connectMatch = async (): Promise<void> => {
     if (me) {
       useMatchStore.getState().setEconomy(me.sessionHp, me.gold);
     }
+  });
+
+  room.onError((code, message) => {
+    useMatchStore.getState().setBootError(`room_error_${code}: ${message}`);
+  });
+
+  room.onLeave((code) => {
+    useMatchStore.getState().setBootError(`disconnected: ${code}`);
   });
 
   room.send(C2S.MATCHMAKING_JOIN);
