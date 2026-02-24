@@ -1,1 +1,1 @@
-export const MatchmakingScreen = (): JSX.Element => <div className="muted">Connecting to matchmaking…</div>;
+export const MatchmakingScreen = (): JSX.Element => <div className="muted">Идёт поиск игроков для матча...</div>;

@@ -30,6 +30,7 @@ npm -v
 - `shared`: protocol, enums, and type contracts used by both sides.
 - `server`: authoritative room/state machine, schema state, RNG, card/ability engines, tick combat, and tests.
 - `client`: Colyseus client + zustand store + battlelog visual queue + three.js scene.
+- Client flow starts from main menu: user clicks start, then matchmaking begins.
 
 ## Run
 ```bash

@@ -10,6 +10,8 @@ npm run preview
 ```
 
 ## UX flow
+- Main menu with "Начать играть" button.
+- After click: matchmaking search starts.
 - Shows phase/timer/sessionHp/gold.
 - Character select buttons.
 - Card purchase row (handles rejected actions).

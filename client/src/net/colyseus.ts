@@ -8,12 +8,22 @@ const WS_ENDPOINT = import.meta.env.VITE_COLYSEUS_URL ?? "ws://localhost:2567";
 let room: Room | null = null;
 
 export const connectMatch = async (): Promise<void> => {
+  if (room) return;
   const client = new Client(WS_ENDPOINT);
   room = await client.joinOrCreate("match");
   useMatchStore.getState().setBootError("");
 
   room.onMessage(S2C.PHASE_UPDATE, (msg: PhaseUpdate) => {
+    useMatchStore.getState().setSearching(false);
     useMatchStore.getState().setPhase(msg.phase, msg.endsAt, msg.round);
+  });
+
+  room.onMessage(S2C.MATCHMAKING_QUEUED, () => {
+    useMatchStore.getState().setSearching(true);
+  });
+
+  room.onMessage(S2C.MATCHMAKING_MATCHED, () => {
+    useMatchStore.getState().setSearching(false);
   });
 
   room.onMessage(S2C.OFFERS_CARDS, (msg: { offerId: string; cards: CardOffer[] }) => {
@@ -41,11 +51,24 @@ export const connectMatch = async (): Promise<void> => {
   });
 
   room.onLeave((code) => {
+    useMatchStore.getState().setSearching(false);
     useMatchStore.getState().setBootError(`disconnected: ${code}`);
   });
+};
 
-  room.send(C2S.MATCHMAKING_JOIN);
-  room.send(C2S.CLIENT_READY);
+export const startMatchmaking = async (): Promise<void> => {
+  useMatchStore.getState().setHasStarted(true);
+  useMatchStore.getState().setSearching(true);
+  try {
+    await connectMatch();
+    room?.send(C2S.MATCHMAKING_JOIN);
+    room?.send(C2S.CLIENT_READY);
+  } catch (error) {
+    useMatchStore.getState().setSearching(false);
+    const message = error instanceof Error ? error.message : String(error);
+    useMatchStore.getState().setBootError(message);
+    throw error;
+  }
 };
 
 export const sendCharacterSelect = (characterId: string): void => room?.send(C2S.CHARACTER_SELECT, { characterId });

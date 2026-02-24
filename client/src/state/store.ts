@@ -2,6 +2,8 @@ import { create } from "zustand";
 import { CardOffer, Phase, type BattleEvent } from "@autobattler/shared";
 
 type MatchStore = {
+  hasStarted: boolean;
+  searching: boolean;
   phase: Phase;
   endsAt: number;
   round: number;
@@ -13,6 +15,8 @@ type MatchStore = {
   bootError: string;
   battleTextLog: string[];
   setPhase: (phase: Phase, endsAt: number, round: number) => void;
+  setHasStarted: (started: boolean) => void;
+  setSearching: (value: boolean) => void;
   setEconomy: (sessionHp: number, gold: number) => void;
   setOffers: (offerId: string, offers: CardOffer[]) => void;
   setRejected: (message: string) => void;
@@ -21,6 +25,8 @@ type MatchStore = {
 };
 
 export const useMatchStore = create<MatchStore>((set, get) => ({
+  hasStarted: false,
+  searching: false,
   phase: Phase.CHARACTER_SELECT,
   endsAt: 0,
   round: 0,
@@ -31,6 +37,8 @@ export const useMatchStore = create<MatchStore>((set, get) => ({
   rejectedMessage: "",
   bootError: "",
   battleTextLog: [],
+  setHasStarted: (started) => set({ hasStarted: started }),
+  setSearching: (value) => set({ searching: value }),
   setPhase: (phase, endsAt, round) => set({ phase, endsAt, round }),
   setEconomy: (sessionHp, gold) => set({ sessionHp, gold }),
   setOffers: (offerId, offers) => set({ offerId, offers }),
