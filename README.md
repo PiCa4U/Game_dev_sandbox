@@ -2,6 +2,23 @@
 
 Monorepo with authoritative Colyseus server and Expo React Native client.
 
+## Install dependencies
+### Recommended (root install)
+```bash
+npm install
+```
+from repo root.
+
+### If your npm is old and/or you install inside subfolders
+This repo now uses `file:../shared` for local shared package linking, so `npm install` inside `server/` or `client/` is also supported.
+
+If you still get `EUNSUPPORTEDPROTOCOL workspace:*`, update npm:
+```bash
+npm -v
+npm i -g npm@latest
+```
+(or use Node LTS with bundled modern npm).
+
 ## Architecture
 - `shared`: protocol, enums, and type contracts used by both sides.
 - `server`: authoritative room/state machine, schema state, RNG, card/ability engines, tick combat, and tests.

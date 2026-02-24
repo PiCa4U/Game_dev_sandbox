@@ -9,11 +9,11 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@autobattler/shared": "1.0.0",
+    "@autobattler/shared": "file:../shared",
     "@colyseus/schema": "^2.0.32",
-    "colyseus": "^0.15.14",
+    "colyseus": "^0.15.0",
     "express": "^4.19.2",
-    "@colyseus/ws-transport": "^0.15.14"
+    "@colyseus/ws-transport": "^0.15.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
